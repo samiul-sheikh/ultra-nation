@@ -1,5 +1,6 @@
 import './App.css';
 import { useEffect, useState } from 'react';
+import Country from './Components/Country/Country';
 
 function App() {
     // declare 1st state/hook
@@ -22,10 +23,10 @@ function App() {
     return (
         <div className="App">
             <h1>Country Loaded: {countries.length}</h1>
-            {/* display country name in UI as list item */}
+            {/* making child component for every country and send dynamic data */}
             <ul>
                 {
-                    countries.map(country => <li>{country.name}</li>)
+                    countries.map(country => <Country name={country.name}></Country>)
                 }
             </ul>
         </div>
