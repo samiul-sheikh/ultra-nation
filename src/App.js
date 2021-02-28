@@ -3,30 +3,21 @@ import { useEffect, useState } from 'react';
 import Country from './Components/Country/Country';
 
 function App() {
-    // declare 1st state/hook
     const [countries, setCountries] = useState([]);
 
-    // declare 2nd state/hook
     useEffect(() => {
         fetch('https://restcountries.eu/rest/v2/all')
             .then(res => res.json())
-            .then(data => {
-                // set data in state
-                setCountries(data);
-                console.log(data)
-                // display country name in console as array from object
-                const names = data.map(country => country.name)
-                console.log(names);
-            })
+            .then(data => setCountries(data))
             .catch(error => console.log('Error Found in Data Load!'))
     }, [])
     return (
         <div className="App">
             <h1>Country Loaded: {countries.length}</h1>
-            {/* making child component for every country and send dynamic data */}
+            {/* send dynamic object for access all property */}
             <ul>
                 {
-                    countries.map(country => <Country name={country.name}></Country>)
+                    countries.map(country => <Country country={country} key={country.alpha3Code}></Country>)
                 }
             </ul>
         </div>
